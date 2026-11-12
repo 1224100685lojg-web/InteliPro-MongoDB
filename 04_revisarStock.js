@@ -12,9 +12,13 @@ function revisarStock(usuario) {
 
     // 3) Determinar el estatus
     var estatus;
-    if (inv.Existencia == 0)                    estatus = "Producto Agotado";
-    else if (inv.Existencia <= inv.StockMinimo) estatus = "Reordenar, por Agotarse";
-    else                                        estatus = "OK";
+    if (inv.Existencia <= 0) {
+      estatus = "Producto Agotado";
+    } else if (inv.Existencia <= inv.StockMinimo) {
+      estatus = "Reordenar, por Agotarse";
+    } else {
+      estatus = "OK";
+    }
 
     // 4) Guardar en la colección RevisionStock
     db.RevisionStock.insertOne({
